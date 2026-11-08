@@ -1,0 +1,8 @@
+.day4-experiment { margin-top: 22px; }
+.day4-controls { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 18px; }
+.day4-table-wrap { margin-top: 18px; overflow-x: auto; }
+.day4-table { width: 100%; min-width: 720px; border-collapse: collapse; background: #fff; font-size: 11px; }
+.day4-table th, .day4-table td { padding: 9px 10px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+.day4-table th { color: var(--muted); background: #f7f7f3; font-size: 10px; font-weight: 700; }
+.day4-breakdown { display: grid; gap: 8px; margin-top: 15px; }
+  .day4-controls { grid-template-columns: 1fr; }

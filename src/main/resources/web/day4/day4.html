@@ -1,0 +1,58 @@
+    <section class="experiment day4-experiment" aria-labelledby="day4-title">
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow">Эксперимент · День 4</div>
+          <h2 id="day4-title">Day 4 — Temperature Experiment</h2>
+        </div>
+        <span id="day4-model-badge" class="status-pill">Загрузка модели…</span>
+      </div>
+
+      <label class="field-label" for="day4-task">Тестовое задание</label>
+      <select id="day4-task">
+        <option value="factual">Factual — Shopping</option>
+        <option value="creative">Creative — Specialty Coffee</option>
+      </select>
+      <p id="day4-task-preview" class="task-preview"></p>
+
+      <div class="day4-controls">
+        <div>
+          <label class="field-label" for="day4-temperature">Temperature</label>
+          <select id="day4-temperature"><option value="0">0.0</option><option value="0.7">0.7</option><option value="1.2">1.2</option></select>
+        </div>
+        <div>
+          <label class="field-label" for="day4-repetitions">Повторения теста</label>
+          <select id="day4-repetitions"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+        </div>
+      </div>
+      <p id="day4-parameters" class="run-estimate">Модель: gpt-4.1 · top_p = 1.0 · max_completion_tokens = 600</p>
+      <div class="actions">
+        <button type="button" id="day4-test-run" class="button button-secondary">Запустить тест</button>
+        <button type="button" id="day4-full-run" class="button button-primary">Полный эксперимент · 30 запросов</button>
+      </div>
+      <p id="day4-notice" class="notice" role="status" aria-live="polite">Тестовый запуск выполнит от одного до пяти последовательных запросов.</p>
+
+      <section id="day4-run-card" class="run-card" aria-labelledby="day4-run-heading" hidden>
+        <div class="result-heading">
+          <div><div class="eyebrow">Day 4 · Запуск эксперимента</div><h3 id="day4-run-heading">Результаты</h3></div>
+          <span id="day4-run-status" class="status-pill">В очереди</span>
+        </div>
+        <div class="progress-track" role="progressbar" aria-label="Прогресс эксперимента Дня 4" aria-valuemin="0" aria-valuemax="30" aria-valuenow="0">
+          <div id="day4-progress-fill" class="progress-fill"></div>
+        </div>
+        <p id="day4-progress-text" class="run-progress-text">0/0 запросов</p>
+        <p id="day4-current-request" class="current-request"></p>
+        <p id="day4-run-error" class="result-error" role="alert" hidden></p>
+        <section id="day4-summary" class="run-summary" hidden>
+          <h4>Итоговая аналитика</h4>
+          <div id="day4-summary-metrics" class="summary-metrics"></div>
+          <div class="day4-table-wrap">
+            <table class="day4-table">
+              <thead><tr><th>Temperature</th><th>Factual accuracy</th><th>Creative valid</th><th>Unique names</th><th>Avg latency</th><th>Avg tokens</th><th>Total cost</th></tr></thead>
+              <tbody id="day4-comparison-body"></tbody>
+            </table>
+          </div>
+          <div id="day4-breakdown" class="day4-breakdown"></div>
+        </section>
+        <div id="day4-results" class="experiment-results"></div>
+      </section>
+    </section>
