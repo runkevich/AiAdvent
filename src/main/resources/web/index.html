@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f0e8">
+  <title>Everyday AI Lab</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <main class="page-shell">
+    <header class="page-header">
+      <div class="eyebrow">Лаборатория экспериментов</div>
+      <h1>Everyday AI Lab</h1>
+      <p class="subtitle">Небольшие эксперименты с возможностями языковых моделей.</p>
+    </header>
+
+    <section class="experiment" aria-labelledby="experiment-title">
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow">Эксперимент · День 2</div>
+          <h2 id="experiment-title">Day 2 — Format Experiment</h2>
+        </div>
+        <span class="status-pill">Подготовка</span>
+      </div>
+
+      <label class="field-label" for="prompt">Базовый prompt</label>
+      <textarea id="prompt" rows="9" spellcheck="false">У меня есть следующие продукты:
+
+куриная грудка
+рис
+яйца
+помидоры
+
+Предложи три варианта ужина.
+
+Для каждого варианта укажи:
+Название блюда
+Ингредиенты
+Пошаговый рецепт
+Время приготовления</textarea>
+
+      <h3>Варианты эксперимента</h3>
+      <div class="variants">
+        <article class="variant-card">
+          <span class="variant-number">01</span>
+          <div><h4>Baseline</h4><p>Исходный prompt без ограничений формата.</p></div>
+        </article>
+        <article class="variant-card">
+          <span class="variant-number">02</span>
+          <div><h4>Инструкции + лимит токенов</h4><p>Единая структура, три рецепта и ограничение длины ответа.</p></div>
+        </article>
+        <article class="variant-card">
+          <span class="variant-number">03</span>
+          <div><h4>Инструкции + stop sequence</h4><p>Те же условия и маркер завершения ответа.</p></div>
+        </article>
+        <article class="variant-card">
+          <span class="variant-number">04</span>
+          <div><h4>Strict JSON Schema</h4><p>Структурированный JSON с обязательными полями.</p></div>
+        </article>
+      </div>
+
+      <label class="field-label variant-select-label" for="variant">Вариант для тестового запроса</label>
+      <select id="variant">
+        <option value="baseline">Вариант 1 — Baseline</option>
+        <option value="format_instructions">Вариант 2 — Format instructions + token limit</option>
+        <option value="stop_sequence">Вариант 3 — Format instructions + token limit + stop</option>
+        <option value="json_schema">Вариант 4 — Strict JSON Schema</option>
+      </select>
+
+      <div class="actions">
+        <button type="button" class="button button-secondary" data-action="test">Запустить тестовый запрос</button>
+        <button type="button" class="button button-primary" data-action="full">Запустить весь эксперимент (12 запросов)</button>
+      </div>
+      <p id="notice" class="notice" role="status" aria-live="polite">Тестовый запуск выполняет один запрос. Полный эксперимент выполнит по три запроса для каждого варианта.</p>
+
+      <section id="experiment-run" class="run-card" aria-labelledby="run-title" hidden>
+        <div class="result-heading">
+          <div>
+            <div class="eyebrow">Полный эксперимент</div>
+            <h3 id="run-title">Выполнение запросов</h3>
+          </div>
+          <span id="run-status" class="status-pill">В очереди</span>
+        </div>
+        <div class="progress-track" role="progressbar" aria-label="Прогресс эксперимента" aria-valuemin="0" aria-valuemax="12" aria-valuenow="0">
+          <div id="progress-fill" class="progress-fill"></div>
+        </div>
+        <p id="run-progress-text" class="run-progress-text">0/12</p>
+        <p id="current-request" class="current-request"></p>
+        <p id="run-error" class="result-error" role="alert" hidden></p>
+        <section id="run-summary" class="run-summary" hidden>
+          <h4>Сводка</h4>
+          <div id="summary-metrics" class="summary-metrics"></div>
+          <div id="variant-averages" class="variant-averages"></div>
+          <div id="experiment-problems" class="experiment-problems" hidden>
+            <h4>Ошибки и замечания</h4>
+            <ul id="problems-list"></ul>
+          </div>
+        </section>
+        <div id="experiment-results" class="experiment-results"></div>
+      </section>
+
+      <section id="result" class="result-card" aria-labelledby="result-title" hidden>
+        <div class="result-heading">
+          <div>
+            <div class="eyebrow">Результат тестового запуска</div>
+            <h3 id="result-title">Ответ модели</h3>
+          </div>
+          <span id="result-status" class="status-pill"></span>
+        </div>
+        <div id="result-error" class="result-error" role="alert" hidden></div>
+        <div class="metrics">
+          <div><span>Время</span><strong id="latency">—</strong></div>
+          <div><span>Input tokens</span><strong id="input-tokens">—</strong></div>
+          <div><span>Output tokens</span><strong id="output-tokens">—</strong></div>
+          <div><span>Total tokens</span><strong id="total-tokens">—</strong></div>
+          <div><span>Finish reason</span><strong id="finish-reason">—</strong></div>
+          <div><span>Проверка JSON</span><strong id="validation">—</strong></div>
+        </div>
+        <div class="answer-block">
+          <h4>Текст ответа</h4>
+          <pre id="response-text" class="response-text"></pre>
+        </div>
+        <details class="raw-response">
+          <summary>Сырой ответ API</summary>
+          <pre id="raw-response"></pre>
+        </details>
+        <p id="result-file" class="result-file"></p>
+      </section>
+    </section>
+
+    <section class="experiment day3-experiment" aria-labelledby="day3-title">
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow">Эксперимент · День 3</div>
+          <h2 id="day3-title">Day 3 — Reasoning &amp; Prompting Techniques</h2>
+        </div>
+        <span id="day3-model-badge" class="status-pill">Загрузка модели…</span>
+      </div>
+
+      <label class="field-label" for="day3-task">Задача</label>
+      <select id="day3-task" disabled aria-describedby="day3-task-preview"></select>
+      <p id="day3-task-preview" class="task-preview">Загружаю список задач…</p>
+
+      <label class="field-label day3-method-label" for="day3-method">Метод решения</label>
+      <select id="day3-method" disabled>
+        <option value="direct">Direct</option>
+        <option value="step_by_step">Step-by-step</option>
+        <option value="prompt_generation">Prompt Generation</option>
+        <option value="expert_panel">Expert Panel</option>
+      </select>
+
+      <fieldset class="reasoning-choice">
+        <legend class="field-label">Reasoning effort</legend>
+        <label><input type="radio" name="day3-effort" value="low" checked> Low</label>
+        <label><input type="radio" name="day3-effort" value="max"> Max</label>
+      </fieldset>
+
+      <div class="actions">
+        <button type="button" id="day3-run" class="button button-primary" disabled>Запустить тестовый запрос</button>
+      </div>
+      <p id="day3-notice" class="notice" role="status" aria-live="polite">Выполнится один запрос к выбранной задаче.</p>
+
+      <section class="day3-full-run-launch" aria-labelledby="day3-full-run-title">
+        <h3 id="day3-full-run-title">Полный эксперимент</h3>
+        <p id="day3-run-estimate" class="run-estimate">Загружаю расчёт: 64 решения, до 80 API-запросов.</p>
+        <div class="actions">
+          <button type="button" id="day3-full-run" class="button button-secondary" disabled>Запустить полный эксперимент · 80 запросов</button>
+        </div>
+        <p id="day3-run-notice" class="notice" role="status" aria-live="polite">Запросы будут выполняться последовательно на сервере.</p>
+      </section>
+
+      <section id="day3-run-card" class="run-card day3-run-card" aria-labelledby="day3-run-heading" hidden>
+        <div class="result-heading">
+          <div>
+            <div class="eyebrow">Day 3 · Полный прогон</div>
+            <h3 id="day3-run-heading">Эксперимент</h3>
+          </div>
+          <span id="day3-run-status" class="status-pill">В очереди</span>
+        </div>
+        <div class="progress-track" role="progressbar" aria-label="Прогресс полного эксперимента" aria-valuemin="0" aria-valuemax="80" aria-valuenow="0">
+          <div id="day3-progress-fill" class="progress-fill"></div>
+        </div>
+        <p id="day3-progress-text" class="run-progress-text">0/80 API-запросов обработано</p>
+        <p id="day3-current-request" class="current-request"></p>
+        <p id="day3-run-error" class="result-error" role="alert" hidden></p>
+
+        <section id="day3-run-summary" class="run-summary" hidden>
+          <h4>Сводка эксперимента</h4>
+          <div id="day3-summary-metrics" class="summary-metrics"></div>
+          <div class="day3-comparison-wrap">
+            <h4>Сравнение методов</h4>
+            <table class="day3-comparison">
+              <thead><tr><th>Метод</th><th>Low · верно</th><th>Max · верно</th><th>Low · latency</th><th>Max · latency</th><th>Low · tokens</th><th>Max · tokens</th></tr></thead>
+              <tbody id="day3-comparison-body"></tbody>
+            </table>
+          </div>
+          <div class="day3-observations">
+            <h4>Что видно по результатам</h4>
+            <ul id="day3-observations-list"></ul>
+          </div>
+        </section>
+
+        <div class="day3-run-results-wrap">
+          <h4>Результаты по задачам</h4>
+          <table class="day3-results-table">
+            <thead><tr><th>Задача</th><th>Метод</th><th>Effort</th><th>Ответ</th><th>Оценка</th><th>Latency</th><th>Tokens in/out</th><th>Reasoning</th><th>Стоимость</th></tr></thead>
+            <tbody id="day3-run-results"></tbody>
+          </table>
+        </div>
+        <p id="day3-run-files" class="result-file"></p>
+      </section>
+
+      <section id="day3-result" class="result-card day3-result" aria-labelledby="day3-result-title" hidden>
+        <div class="result-heading">
+          <div>
+            <div class="eyebrow">Результат тестового запуска</div>
+            <h3 id="day3-result-title">Ответ модели</h3>
+          </div>
+          <span id="day3-result-status" class="status-pill"></span>
+        </div>
+        <div id="day3-error" class="result-error" role="alert" hidden></div>
+        <div class="metrics">
+          <div><span>Reasoning effort</span><strong id="day3-result-effort">—</strong></div>
+          <div><span>Метод</span><strong id="day3-result-method">—</strong></div>
+          <div><span>Модель</span><strong id="day3-result-model">—</strong></div>
+          <div><span>HTTP status</span><strong id="day3-http-status">—</strong></div>
+          <div><span>Response status</span><strong id="day3-response-status">—</strong></div>
+          <div><span>Время</span><strong id="day3-latency">—</strong></div>
+          <div><span>Input tokens</span><strong id="day3-input-tokens">—</strong></div>
+          <div><span>Output tokens</span><strong id="day3-output-tokens">—</strong></div>
+          <div><span>Reasoning tokens</span><strong id="day3-reasoning-tokens">—</strong></div>
+          <div><span>Total tokens</span><strong id="day3-total-tokens">—</strong></div>
+          <div><span>Estimated cost</span><strong id="day3-cost">—</strong></div>
+          <div><span>Оценка ответа</span><strong id="day3-validation">—</strong></div>
+        </div>
+        <div class="answer-block">
+          <h4>Ответ</h4>
+          <pre id="day3-response-text" class="response-text"></pre>
+          <h4>Краткое объяснение</h4>
+          <pre id="day3-explanation" class="response-text"></pre>
+          <p id="day3-expected-answer" class="task-preview"></p>
+        </div>
+        <details id="day3-generated-prompt-details" class="raw-response" hidden>
+          <summary>Сгенерированный промпт</summary>
+          <pre id="day3-generated-prompt"></pre>
+        </details>
+        <details class="raw-response">
+          <summary>Технические метаданные</summary>
+          <pre id="day3-technical-details"></pre>
+        </details>
+        <p id="day3-result-file" class="result-file"></p>
+      </section>
+    </section>
+
+    <footer>Локальный учебный интерфейс · API-ключ не передаётся в браузер</footer>
+  </main>
+</body>
+</html>
