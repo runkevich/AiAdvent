@@ -1,3 +1,5 @@
+package shared
+
 internal object ApiKeyProvider {
     fun get(): String = System.getenv("OPENAI_API_KEY")
         ?.takeIf(String::isNotBlank)

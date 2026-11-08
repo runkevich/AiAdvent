@@ -1,3 +1,5 @@
+package day3
+
 import java.util.Locale
 
 internal object Day3AnswerValidator {

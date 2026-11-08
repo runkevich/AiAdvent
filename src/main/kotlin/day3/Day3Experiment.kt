@@ -1,3 +1,5 @@
+package day3
+
 import kotlinx.serialization.Serializable
 
 /** The canonical Day 3 task catalog. The browser will consume this catalog from the server in a later stage. */

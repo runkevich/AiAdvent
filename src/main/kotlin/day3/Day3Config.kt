@@ -1,3 +1,5 @@
+package day3
+
 /** Central settings and published standard text-token rates for the Day 3 model. */
 internal object Day3Config {
     val model: String = System.getenv("DAY3_OPENAI_MODEL")?.takeIf(String::isNotBlank) ?: "gpt-6-luna"

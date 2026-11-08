@@ -1,3 +1,5 @@
+package day2
+
 import java.time.Instant
 import java.util.UUID
 import kotlinx.coroutines.CoroutineScope
