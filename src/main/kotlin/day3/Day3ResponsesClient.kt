@@ -38,9 +38,11 @@ internal data class Day3ResponsesResult(
     val incompleteDetails: JsonElement?,
     val rawApiResponse: JsonElement,
     val error: String?,
+    val cachedInputTokens: Int? = null,
+    val actualModelId: String? = null,
 )
 
-/** Day 3-only Responses API client. It does not share request behavior with the Day 1 or Day 2 clients. */
+/** Responses API client with Day 3 defaults and explicit per-request overrides for Day 5. */
 internal class Day3ResponsesClient(
     private val model: String = Day3Config.model,
     private val maxOutputTokens: Int = Day3Config.maxOutputTokens,
@@ -54,10 +56,12 @@ internal class Day3ResponsesClient(
         prompt: String,
         effort: Day3ReasoningEffort,
         structuredOutput: Boolean = true,
+        modelIdOverride: String? = null,
+        maxOutputTokensOverride: Int? = null,
     ): JsonObject = buildJsonObject {
-        put("model", model)
+        put("model", modelIdOverride?.takeIf(String::isNotBlank) ?: model)
         put("input", prompt)
-        put("max_output_tokens", maxOutputTokens)
+        put("max_output_tokens", maxOutputTokensOverride ?: maxOutputTokens)
         put("reasoning", buildJsonObject { put("effort", effort.apiValue) })
         if (structuredOutput) {
             put("text", buildJsonObject {
@@ -75,6 +79,8 @@ internal class Day3ResponsesClient(
         prompt: String,
         effort: Day3ReasoningEffort,
         structuredOutput: Boolean = true,
+        modelIdOverride: String? = null,
+        maxOutputTokensOverride: Int? = null,
     ): Day3ResponsesResult {
         val operationStartedAt = System.nanoTime()
         val apiKey = try {
@@ -94,7 +100,7 @@ internal class Day3ResponsesClient(
             val response = httpClient.post("https://api.openai.com/v1/responses") {
                 header("Authorization", "Bearer $apiKey")
                 contentType(ContentType.Application.Json)
-                setBody(requestParameters(prompt, effort, structuredOutput).toString())
+                setBody(requestParameters(prompt, effort, structuredOutput, modelIdOverride, maxOutputTokensOverride).toString())
             }
             val responseBody = response.bodyAsText()
             val safeBody = redact(responseBody, apiKey)
@@ -146,6 +152,7 @@ internal class Day3ResponsesClient(
         val totalTokens = usage.intValue("total_tokens")
         val reasoningTokens = (usage?.get("output_tokens_details") as? JsonObject).intValue("reasoning_tokens")
         val inputDetails = (usage?.get("input_tokens_details") as? JsonObject)
+        val cachedInputTokens = inputDetails.intValue("cached_tokens")
         val cost = if (inputTokens != null && outputTokens != null) {
             pricing.costUsd(
                 inputTokens = inputTokens,
@@ -176,6 +183,8 @@ internal class Day3ResponsesClient(
             incompleteDetails = root["incomplete_details"],
             rawApiResponse = raw,
             error = if (responseText == null) missingTextMessage(responseStatus, incompleteReason) else null,
+            cachedInputTokens = cachedInputTokens,
+            actualModelId = root.stringValue("model"),
         )
     }
 
@@ -200,6 +209,7 @@ internal class Day3ResponsesClient(
         incompleteDetails = (raw as? JsonObject)?.get("incomplete_details"),
         rawApiResponse = raw,
         error = message,
+        actualModelId = (raw as? JsonObject).stringValue("model"),
     )
 
     private fun extractOutputText(root: JsonObject): String? {

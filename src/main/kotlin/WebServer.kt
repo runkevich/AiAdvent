@@ -10,6 +10,10 @@ import day3.Day3TestService
 import day4.Day4Config
 import day4.Day4RunManager
 import day4.Day4TaskCatalog
+import day5.Day5ExperimentService
+import day5.Day5ResultStore
+import day5.Day5RunManager
+import day5.day5Routes
 import io.ktor.http.ContentType
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.ApplicationCall
@@ -47,9 +51,14 @@ fun main() {
     val runManager = ExperimentRunManager(day2, operationMutex)
     val day3RunManager = Day3RunManager(day3, operationMutex)
     val day4RunManager = Day4RunManager(day4.Day4ExperimentService(), operationMutex)
+    val day5 = Day5ExperimentService()
+    val day5ResultStore = Day5ResultStore()
+    val day5RequestMutex = Mutex()
+    val day5RunManager = Day5RunManager(day5, day5ResultStore, day5RequestMutex)
     embeddedServer(Netty, host = HOST, port = PORT) {
         routing {
             staticResources("/", "web")
+            day5Routes(day5, day5ResultStore, day5RequestMutex, day5RunManager)
             get("/api/day4/config") {
                 val config = buildJsonObject {
                     put("model", Day4Config.model)

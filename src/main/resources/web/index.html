@@ -7,8 +7,10 @@
   <title>Everyday AI Lab</title>
   <link rel="stylesheet" href="/styles.css">
   <link rel="stylesheet" href="/day4/day4.css">
+  <link rel="stylesheet" href="/day5/day5.css?v=day5-analytics-1">
   <script src="/app.js" defer></script>
   <script src="/day4/day4.js" defer></script>
+  <script src="/day5/day5.js?v=day5-results-analytics-1" defer></script>
 </head>
 <body>
   <main class="page-shell">
@@ -257,6 +259,126 @@
     </section>
 
     <div id="day4-root"></div>
+
+    <section class="experiment day5-experiment" aria-labelledby="day5-title">
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow">Эксперимент · День 5</div>
+          <h2 id="day5-title">Day 5 — Model Comparison</h2>
+        </div>
+        <span id="day5-status" class="status-pill">Загружаю настройки…</span>
+      </div>
+      <label class="field-label" for="day5-model">Модель</label>
+      <select id="day5-model" disabled><option value="">Загрузка моделей…</option></select>
+      <label class="field-label day5-label" for="day5-task">Задача</label>
+      <select id="day5-task" disabled><option value="">Загрузка задач…</option></select>
+      <p id="day5-task-preview" class="task-preview">Загружаю список задач…</p>
+      <div class="actions">
+        <button id="day5-run" type="button" class="button button-primary" disabled>Запустить один запрос</button>
+      </div>
+      <p id="day5-notice" class="notice" role="status" aria-live="polite">Будет выполнен один запрос выбранной модели.</p>
+
+      <section class="day5-full-run" aria-labelledby="day5-full-title">
+        <div class="result-heading">
+          <div><div class="eyebrow">Полный эксперимент</div><h3 id="day5-full-title">Сравнить все модели и задачи</h3></div>
+          <span id="day5-full-status" class="status-pill">Готов к запуску</span>
+        </div>
+        <p class="notice">Будет отправлено 15 последовательных запросов (3 модели × 5 задач). Запросы тарифицируются; итоговая стоимость зависит от фактического числа токенов.</p>
+        <button id="day5-full-run" type="button" class="button button-secondary" disabled>Запустить 15 запросов</button>
+        <div id="day5-full-progress-wrap" class="day5-full-progress" hidden>
+          <progress id="day5-full-progress" max="15" value="0"></progress>
+          <p id="day5-full-current" aria-live="polite">Ожидание…</p>
+          <p id="day5-full-message" role="status"></p>
+          <p><a id="day5-full-results" href="#" target="_blank" rel="noopener" hidden>Открыть сохранённые результаты</a></p>
+        </div>
+      </section>
+
+      <section class="day5-analytics" aria-labelledby="day5-analytics-title">
+        <div class="result-heading">
+          <div><div class="eyebrow">Результаты эксперимента</div><h3 id="day5-analytics-title">Results &amp; Analytics</h3></div>
+          <span id="day5-analytics-status" class="status-pill">Выберите запуск</span>
+        </div>
+        <p id="day5-analytics-run" class="day5-analytics-run">Аналитика появится после выбора сохранённого запуска.</p>
+        <div id="day5-analytics-warning" class="notice" role="status" hidden></div>
+
+        <section class="day5-history" aria-labelledby="day5-history-title">
+          <h4 id="day5-history-title">История запусков</h4>
+          <div id="day5-history-list" class="day5-history-list"><p>Загружаю историю…</p></div>
+        </section>
+
+        <div id="day5-analytics-content" hidden>
+          <h4>Model Comparison</h4>
+          <div class="day5-table-scroll">
+            <table class="day5-table">
+              <thead><tr><th>Model</th><th>Correct</th><th>Accuracy</th><th>Avg latency</th><th>Total tokens</th><th>Total cost</th></tr></thead>
+              <tbody id="day5-model-rows"></tbody>
+            </table>
+          </div>
+
+          <h4>Task Comparison</h4>
+          <div class="day5-table-scroll">
+            <table class="day5-table day5-task-table">
+              <thead><tr><th>Task</th><th>Luna</th><th>Sol</th><th>Astra</th><th>Conclusion</th></tr></thead>
+              <tbody id="day5-task-rows"></tbody>
+            </table>
+          </div>
+
+          <h4>Cost Comparison</h4>
+          <div id="day5-cost-cards" class="day5-cost-cards"></div>
+          <p id="day5-cost-multipliers" class="day5-comparison-note"></p>
+
+          <h4>Performance Comparison</h4>
+          <div id="day5-performance-cards" class="day5-cost-cards"></div>
+
+          <h4>Charts</h4>
+          <div class="day5-charts">
+            <div><h5>Стоимость</h5><div id="day5-chart-cost" class="day5-chart"></div></div>
+            <div><h5>Средняя задержка</h5><div id="day5-chart-latency" class="day5-chart"></div></div>
+            <div><h5>Точность</h5><div id="day5-chart-accuracy" class="day5-chart"></div></div>
+          </div>
+
+          <section id="day5-conclusions-section" class="day5-conclusions" aria-labelledby="day5-conclusions-title" hidden>
+            <h4 id="day5-conclusions-title">Automatic Conclusions</h4>
+            <ul id="day5-conclusions"></ul>
+            <p class="day5-limitation">Выводы описывают только этот запуск из пяти задач и не устанавливают общее равенство возможностей моделей.</p>
+          </section>
+        </div>
+      </section>
+
+      <section id="day5-result" class="result-card day5-result" aria-labelledby="day5-result-title" hidden>
+        <div class="result-heading">
+          <div>
+            <div class="eyebrow">Результат одиночного запуска</div>
+            <h3 id="day5-result-title">Ответ модели</h3>
+          </div>
+          <span id="day5-validation" class="status-pill">—</span>
+        </div>
+        <p id="day5-error" class="result-error" role="alert" hidden></p>
+        <div class="metrics day5-metrics">
+          <div><span>Запрошенная модель</span><strong id="day5-requested-model">—</strong></div>
+          <div><span>Фактическая модель</span><strong id="day5-actual-model">—</strong></div>
+          <div><span>Статус ответа</span><strong id="day5-response-status">—</strong></div>
+          <div><span>Latency</span><strong id="day5-latency">—</strong></div>
+          <div><span>Input tokens</span><strong id="day5-input-tokens">—</strong></div>
+          <div><span>Cached input tokens</span><strong id="day5-cached-tokens">—</strong></div>
+          <div><span>Output tokens</span><strong id="day5-output-tokens">—</strong></div>
+          <div><span>Reasoning tokens</span><strong id="day5-reasoning-tokens">—</strong></div>
+          <div><span>Total tokens</span><strong id="day5-total-tokens">—</strong></div>
+          <div><span>Стоимость</span><strong id="day5-cost">—</strong></div>
+        </div>
+        <div class="answer-block">
+          <h4>Ответ</h4>
+          <pre id="day5-answer" class="response-text"></pre>
+          <h4>Краткое объяснение</h4>
+          <pre id="day5-explanation" class="response-text"></pre>
+        </div>
+        <details class="day5-prompt">
+          <summary>Показать использованный prompt</summary>
+          <pre id="day5-prompt" class="response-text"></pre>
+        </details>
+        <p id="day5-result-file" class="result-file"></p>
+      </section>
+    </section>
 
     <footer>Локальный учебный интерфейс · API-ключ не передаётся в браузер</footer>
   </main>
