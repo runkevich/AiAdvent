@@ -8,9 +8,11 @@
   <link rel="stylesheet" href="/styles.css">
   <link rel="stylesheet" href="/day4/day4.css">
   <link rel="stylesheet" href="/day5/day5.css?v=day5-analytics-1">
+  <link rel="stylesheet" href="/day6/day6.css?v=day6-1">
   <script src="/app.js" defer></script>
   <script src="/day4/day4.js" defer></script>
   <script src="/day5/day5.js?v=day5-results-analytics-1" defer></script>
+  <script src="/day6/day6.js?v=day6-1" defer></script>
 </head>
 <body>
   <main class="page-shell">
@@ -377,6 +379,31 @@
           <pre id="day5-prompt" class="response-text"></pre>
         </details>
         <p id="day5-result-file" class="result-file"></p>
+      </section>
+    </section>
+
+    <section class="experiment day6-experiment" aria-labelledby="day6-title">
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow">Задание · День 6</div>
+          <h2 id="day6-title">Первый агент</h2>
+        </div>
+        <span class="status-pill">3 инструмента · цикл вызовов</span>
+      </div>
+      <p class="day6-intro">Задайте вопрос. Агент сам выберет инструмент, выполнит функцию и использует результат в ответе.</p>
+      <div class="day6-examples" aria-label="Примеры запросов">
+        <button type="button" class="day6-example" data-prompt="Привет! Объясни в одном предложении, что ты умеешь.">Без инструмента</button>
+        <button type="button" class="day6-example" data-prompt="Сколько будет 184 умножить на 27? Проверь с помощью калькулятора.">Один инструмент</button>
+        <button type="button" class="day6-example" data-prompt="Найди в списке номер дня задачи про сохранение контекста, затем прибавь к этому номеру 10 с помощью калькулятора.">Два инструмента подряд</button>
+      </div>
+      <label class="field-label" for="day6-message">Сообщение</label>
+      <textarea id="day6-message" rows="3" placeholder="Например: сколько будет 184 × 27?"></textarea>
+      <div class="actions"><button id="day6-send" type="button" class="button button-primary">Спросить агента</button></div>
+      <p id="day6-notice" class="notice" role="status" aria-live="polite">Вызовы инструментов и их результаты будут показаны ниже.</p>
+      <section id="day6-result" class="day6-result" hidden aria-live="polite">
+        <h3>Ответ агента</h3>
+        <pre id="day6-answer" class="response-text"></pre>
+        <div id="day6-tools" class="day6-tools"></div>
       </section>
     </section>
 

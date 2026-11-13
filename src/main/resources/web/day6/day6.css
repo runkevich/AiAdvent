@@ -1,0 +1,12 @@
+.day6-experiment { margin-top: 22px; }
+.day6-intro { margin: -10px 0 18px; color: var(--muted); font-size: 13px; line-height: 1.55; }
+.day6-examples { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+.day6-example { border: 1px solid var(--line); border-radius: 999px; padding: 8px 12px; background: #fff; color: var(--green-dark); font: 600 11px 'Avenir Next', Avenir, sans-serif; cursor: pointer; }
+.day6-example:hover { background: var(--soft-green); }
+.day6-experiment textarea { min-height: 90px; }
+.day6-result { margin-top: 20px; padding-top: 15px; border-top: 1px solid var(--line); }
+.day6-result h3 { margin: 0 0 10px; }
+.day6-tool-call { margin-top: 9px; border: 1px solid var(--line); border-radius: 9px; padding: 11px 13px; background: #fffefa; color: var(--green-dark); font-size: 12px; }
+.day6-tool-call summary { cursor: pointer; font-weight: 700; }
+.day6-tool-call pre { margin: 10px 0 0; white-space: pre-wrap; overflow-wrap: anywhere; color: var(--ink); font: 11px/1.6 ui-monospace, SFMono-Regular, Menlo, monospace; }
+@media (max-width: 620px) { .day6-examples { display: grid; } .day6-example { text-align: left; } }

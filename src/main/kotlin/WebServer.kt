@@ -14,6 +14,7 @@ import day5.Day5ExperimentService
 import day5.Day5ResultStore
 import day5.Day5RunManager
 import day5.day5Routes
+import day6.day6Routes
 import io.ktor.http.ContentType
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.ApplicationCall
@@ -59,6 +60,7 @@ fun main() {
         routing {
             staticResources("/", "web")
             day5Routes(day5, day5ResultStore, day5RequestMutex, day5RunManager)
+            day6Routes()
             get("/api/day4/config") {
                 val config = buildJsonObject {
                     put("model", Day4Config.model)
