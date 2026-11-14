@@ -1,0 +1,36 @@
+.day8-experiment { margin-top: 22px; }
+.day8-intro { margin: -10px 0 18px; color: var(--muted); font-size: 13px; line-height: 1.55; }
+.day8-experiment select { margin-bottom: 16px; }
+.day8-examples { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+.day8-new-hint { margin: -6px 0 16px; border-left: 3px solid #9bb29e; padding: 9px 12px; background: #f6f7f3; color: var(--muted); font-size: 11px; line-height: 1.6; }
+.day8-examples .button { min-height: 36px; padding: 0 12px; font-size: 11px; }
+.day8-transcript { display: grid; gap: 8px; max-height: 340px; overflow-y: auto; margin: 12px 0 18px; padding: 12px; border: 1px solid var(--line); border-radius: 12px; background: #f8f8f4; }
+.day8-entry { padding: 10px 12px; border: 1px solid var(--line); border-radius: 9px; background: #fff; }
+.day8-entry-user { background: #f5f8f3; }
+.day8-entry-label { display: block; margin-bottom: 5px; color: var(--green); font-size: 10px; font-weight: 700; text-transform: uppercase; }
+.day8-entry pre { max-height: 140px; overflow: auto; margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font: 11px/1.55 'Avenir Next', Avenir, sans-serif; }
+.day8-experiment textarea { min-height: 90px; }
+.day8-usage { margin-top: 26px; padding-top: 20px; border-top: 1px solid var(--line); }
+.day8-usage .result-heading h3 { margin: 0; }
+.day8-usage .result-heading strong { color: var(--green-dark); font-size: 13px; }
+.day8-latest-metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin: 15px 0; }
+.day8-latest-metrics div { display: grid; gap: 5px; padding: 11px; border-radius: 9px; background: #f6f7f3; }
+.day8-latest-metrics span { color: var(--muted); font-size: 10px; }
+.day8-latest-metrics strong { overflow-wrap: anywhere; font-size: 12px; }
+.day8-chart { min-height: 130px; overflow: auto; padding: 10px 0; color: var(--muted); font-size: 11px; }
+.day8-chart-legend { display: flex; flex-wrap: wrap; gap: 14px; margin: 16px 0 0; color: var(--muted); font-size: 11px; }
+.day8-chart-legend span::before { display: inline-block; width: 9px; height: 9px; margin-right: 6px; border-radius: 50%; content: ''; }
+.day8-legend-estimate::before { background: #557a9b; }
+.day8-legend-actual::before { background: #3c7954; }
+.day8-chart svg { display: block; width: 100%; min-width: 380px; height: auto; }
+.day8-grid-line { stroke: #e5e9e1; stroke-width: 1; }
+.day8-axis-label { fill: #68736c; font-size: 10px; }
+.day8-estimate-line { fill: none; stroke: #557a9b; stroke-width: 2.5; }
+.day8-actual-line { fill: none; stroke: #3c7954; stroke-width: 2.5; }
+circle.day8-estimate-line { fill: #557a9b; }
+circle.day8-actual-line { fill: #3c7954; }
+.day8-table-wrap { overflow-x: auto; }
+.day8-table { width: 100%; min-width: 760px; border-collapse: collapse; background: #fff; font-size: 11px; }
+.day8-table th, .day8-table td { padding: 9px 10px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+.day8-table th { background: #f7f7f3; color: var(--muted); font-size: 10px; }
+@media (max-width: 620px) { .day8-examples { display: grid; } .day8-examples .button { width: 100%; } .day8-latest-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); } }

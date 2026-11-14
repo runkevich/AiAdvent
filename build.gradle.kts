@@ -20,6 +20,7 @@ dependencies {
     implementation("io.ktor:ktor-server-core:3.0.1")
     implementation("io.ktor:ktor-server-netty:3.0.1")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
+    implementation("com.knuddels:jtokkit:1.1.0")
     testImplementation(kotlin("test-junit5"))
     testImplementation("io.ktor:ktor-server-test-host:3.0.1")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")

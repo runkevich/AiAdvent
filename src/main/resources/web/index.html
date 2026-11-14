@@ -10,11 +10,13 @@
   <link rel="stylesheet" href="/day5/day5.css?v=day5-analytics-1">
   <link rel="stylesheet" href="/day6/day6.css?v=day6-1">
   <link rel="stylesheet" href="/day7/day7.css?v=day7-1">
+  <link rel="stylesheet" href="/day8/day8.css?v=day8-1">
   <script src="/app.js" defer></script>
   <script src="/day4/day4.js" defer></script>
   <script src="/day5/day5.js?v=day5-results-analytics-1" defer></script>
   <script src="/day6/day6.js?v=day6-1" defer></script>
   <script src="/day7/day7.js?v=day7-1" defer></script>
+  <script src="/day8/day8.js?v=day8-3" defer></script>
 </head>
 <body>
   <main class="page-shell">
@@ -424,6 +426,46 @@
       <textarea id="day7-message" rows="3" placeholder="Напишите агенту и продолжите диалог"></textarea>
       <div class="actions"><button id="day7-send" type="button" class="button button-primary">Отправить</button></div>
       <p id="day7-notice" class="notice" role="status" aria-live="polite">История синхронизируется с локальным JSON-файлом на сервере.</p>
+    </section>
+
+    <section class="experiment day8-experiment" aria-labelledby="day8-title">
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow">Задание · День 8</div>
+          <h2 id="day8-title">Работа с токенами</h2>
+        </div>
+        <span id="day8-status" class="status-pill">Загрузка…</span>
+      </div>
+      <p class="day8-intro">Текст считается через o200k_base. API сообщает фактические токены каждого раунда; оценки структуры запроса могут отличаться из-за служебного формата. Стоимость считается по тарифам GPT‑4.1.</p>
+      <label class="field-label" for="day8-context-mode">Лимит контекста для проверки</label>
+      <select id="day8-context-mode">
+        <option value="demo">Учебный лимит · 8 000 токенов</option>
+        <option value="model">Предел модели · 1 047 576 токенов</option>
+      </select>
+      <div class="day8-examples">
+        <button id="day8-short-example" type="button" class="button button-secondary">Короткий пример</button>
+        <button id="day8-long-example" type="button" class="button button-secondary">Длинная реплика · фестиваль</button>
+        <button id="day8-new" type="button" class="button button-secondary">Новый замер</button>
+      </div>
+      <p class="day8-new-hint"><strong>Для нового замера:</strong> начни с «Планирую поездку в Прагу 3–7 декабря. Бюджет 900 €, отель до 120 € за ночь, без ночных автобусов». Следом добавь: «Еду с ребёнком, нужна кухня и спокойный район». Потом спроси: «Какие даты, общий бюджет, лимит отеля и ограничения по транспорту я назвал?»</p>
+      <div id="day8-transcript" class="day8-transcript" aria-live="polite"></div>
+      <label class="field-label" for="day8-message">Сообщение</label>
+      <textarea id="day8-message" rows="3" placeholder="Задайте вопрос и наблюдайте за ростом контекста"></textarea>
+      <div class="actions"><button id="day8-send" type="button" class="button button-primary">Отправить</button></div>
+      <p id="day8-notice" class="notice" role="status" aria-live="polite">Для демонстрации переполнения оставьте учебный лимит и отправьте длинный пример несколько раз.</p>
+
+      <section class="day8-usage" aria-labelledby="day8-usage-title">
+        <div class="result-heading"><h3 id="day8-usage-title">Статистика по ходам</h3><strong id="day8-total-cost">—</strong></div>
+        <div class="day8-latest-metrics" id="day8-latest-metrics"></div>
+        <p class="day8-chart-legend"><span class="day8-legend-estimate">Оценка полного запроса</span><span class="day8-legend-actual">Фактический API input</span></p>
+        <div id="day8-chart" class="day8-chart" aria-label="График роста токенов"></div>
+        <div class="day8-table-wrap">
+          <table class="day8-table">
+            <thead><tr><th>Ход</th><th>Статус</th><th>Prompt</th><th>История до</th><th>Оценка запроса</th><th>API input/output</th><th>Стоимость</th></tr></thead>
+            <tbody id="day8-rows"></tbody>
+          </table>
+        </div>
+      </section>
     </section>
 
     <footer>Локальный учебный интерфейс · API-ключ не передаётся в браузер</footer>
