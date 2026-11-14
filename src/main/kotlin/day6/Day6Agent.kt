@@ -79,7 +79,7 @@ class Day6Agent(
         .ifBlank { "Модель не вернула текстовый ответ." }
 }
 
-private suspend fun requestOpenAi(body: JsonObject): JsonObject {
+internal suspend fun requestOpenAi(body: JsonObject): JsonObject {
     val apiKey = ApiKeyProvider.get()
     val client = HttpClient(CIO)
     try {
@@ -100,7 +100,7 @@ private suspend fun requestOpenAi(body: JsonObject): JsonObject {
     }
 }
 
-private object Day6Tools {
+internal object Day6Tools {
     val schemas = buildJsonArray {
         add(function("current_time", "Возвращает текущее локальное время.", buildJsonObject { put("type", "object"); put("properties", buildJsonObject {}); put("required", buildJsonArray {}); put("additionalProperties", false) }))
         add(function("calculator", "Выполняет простую арифметическую операцию над двумя числами.", buildJsonObject {
