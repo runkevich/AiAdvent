@@ -10,13 +10,15 @@
   <link rel="stylesheet" href="/day5/day5.css?v=day5-analytics-1">
   <link rel="stylesheet" href="/day6/day6.css?v=day6-1">
   <link rel="stylesheet" href="/day7/day7.css?v=day7-1">
-  <link rel="stylesheet" href="/day8/day8.css?v=day8-1">
+  <link rel="stylesheet" href="/day8/day8.css?v=day8-2">
+  <link rel="stylesheet" href="/day9/day9.css?v=day9-1">
   <script src="/app.js" defer></script>
   <script src="/day4/day4.js" defer></script>
   <script src="/day5/day5.js?v=day5-results-analytics-1" defer></script>
   <script src="/day6/day6.js?v=day6-1" defer></script>
   <script src="/day7/day7.js?v=day7-1" defer></script>
   <script src="/day8/day8.js?v=day8-3" defer></script>
+  <script src="/day9/day9.js?v=day9-1" defer></script>
 </head>
 <body>
   <main class="page-shell">
@@ -465,6 +467,47 @@
             <tbody id="day8-rows"></tbody>
           </table>
         </div>
+      </section>
+    </section>
+
+    <section class="experiment day9-experiment" aria-labelledby="day9-title">
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow">Задание · День 9</div>
+          <h2 id="day9-title">Сжатие истории</h2>
+        </div>
+        <span id="day9-status" class="status-pill">Загрузите сценарий</span>
+      </div>
+      <p class="day9-intro">Полная история сохраняется для проверки. В режиме summary старые ходы постепенно заменяются резюме, а модели передаются резюме и последние 6 ходов.</p>
+      <div class="day9-actions">
+        <button id="day9-scenario" type="button" class="button button-secondary">Новый сценарий · 20 сообщений</button>
+        <button id="day9-evaluate" type="button" class="button button-primary" disabled>Проверить 5 деталей в обоих режимах</button>
+      </div>
+      <section class="day9-facts" aria-labelledby="day9-facts-title">
+        <h3 id="day9-facts-title">Проверяемые детали — зафиксированы заранее</h3>
+        <div id="day9-fact-list"><p>Создайте сценарий, чтобы увидеть список деталей.</p></div>
+      </section>
+      <label class="field-label" for="day9-strategy">Стратегия контекста</label>
+      <select id="day9-strategy">
+        <option value="full">Полная история · baseline</option>
+        <option value="summary">Summary + последние 6 ходов</option>
+      </select>
+      <div class="day9-summary" id="day9-summary" hidden>
+        <details open>
+          <summary>Текущее summary · <span id="day9-summary-meta">0 ходов</span></summary>
+          <pre id="day9-summary-text"></pre>
+        </details>
+      </div>
+      <div id="day9-transcript" class="day9-transcript" aria-live="polite"></div>
+      <label class="field-label" for="day9-message">Сообщение</label>
+      <textarea id="day9-message" rows="3" placeholder="Продолжите сценарий или добавьте свои детали"></textarea>
+      <div class="actions"><button id="day9-send" type="button" class="button button-primary">Отправить</button></div>
+      <p id="day9-notice" class="notice" role="status" aria-live="polite">Сначала загрузите сценарий: он содержит 20 сообщений и 5 заранее заданных фактов.</p>
+      <div class="day9-token-summary" id="day9-token-summary"></div>
+      <section id="day9-evaluation" class="day9-evaluation" hidden aria-live="polite">
+        <h3>Сравнение памяти и токенов</h3>
+        <div id="day9-evaluation-summary" class="day9-evaluation-summary"></div>
+        <div class="day9-results-grid" id="day9-results-grid"></div>
       </section>
     </section>
 
