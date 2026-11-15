@@ -1,0 +1,11 @@
+.day10-experiment { margin-top: 2rem; }
+.day10-controls { display: grid; grid-template-columns: minmax(130px, .4fr) minmax(260px, 1fr); gap: .6rem 1rem; align-items: center; margin: 1rem 0; }
+.day10-controls .field-label { margin: 0; }
+.day10-controls select { min-width: 0; }
+#day10-facts-panel { margin: 1rem 0; padding: .8rem 1rem; border: 1px solid var(--border, #ddd); border-radius: 12px; }
+#day10-facts-panel pre { white-space: pre-wrap; overflow-wrap: anywhere; }
+#day10-conclusion { margin-top: 1rem; }
+.day10-table-wrap { max-width: 100%; overflow-x: auto; margin: 1rem 0; }
+.day10-table { width: 100%; border-collapse: collapse; }
+.day10-table th, .day10-table td { padding: .7rem; text-align: left; border-bottom: 1px solid var(--border, #ddd); white-space: nowrap; }
+@media (max-width: 640px) { .day10-controls { grid-template-columns: 1fr; } }

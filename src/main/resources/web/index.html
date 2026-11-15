@@ -19,6 +19,8 @@
   <script src="/day7/day7.js?v=day7-1" defer></script>
   <script src="/day8/day8.js?v=day8-3" defer></script>
   <script src="/day9/day9.js?v=day9-1" defer></script>
+  <link rel="stylesheet" href="/day10/day10.css?v=day10-1">
+  <script src="/day10/day10.js?v=day10-1" defer></script>
 </head>
 <body>
   <main class="page-shell">
@@ -509,6 +511,22 @@
         <div id="day9-evaluation-summary" class="day9-evaluation-summary"></div>
         <div class="day9-results-grid" id="day9-results-grid"></div>
       </section>
+    </section>
+
+    <section class="experiment day10-experiment" aria-labelledby="day10-title">
+      <div class="section-heading"><div><div class="eyebrow">Задание · День 10</div><h2 id="day10-title">Сравнение стратегий и ветвление</h2></div><span id="day10-status" class="status-pill">Создайте checkpoint</span></div>
+      <p class="day9-intro">Сравните Sliding Window, Sticky Facts и Summary на одном сценарии Дня 9. Checkpoint создаёт две независимые ветки A и B.</p>
+      <div class="day9-actions"><button id="day10-scenario" type="button" class="button button-secondary">Создать checkpoint и две ветки</button><button id="day10-evaluate" type="button" class="button button-primary" disabled>Сравнить 3 стратегии</button></div>
+      <div class="day10-controls">
+        <label class="field-label" for="day10-branch">Ветка</label><select id="day10-branch"><option value="a">Ветка A</option><option value="b">Ветка B</option></select>
+        <label class="field-label" for="day10-strategy">Стратегия контекста</label><select id="day10-strategy"><option value="sliding_window">Sliding Window · последние 6 ходов</option><option value="sticky_facts">Sticky Facts · факты + последние 6 ходов</option><option value="summary">Summary · сводка + последние 6 ходов</option></select>
+      </div>
+      <p id="day10-checkpoint" class="notice">Сначала создайте checkpoint. Ветка A и B начнутся с одной и той же истории.</p>
+      <details id="day10-facts-panel"><summary>Sticky Facts — сохранённые ключевые факты</summary><pre id="day10-facts">Появятся после извлечения фактов.</pre></details>
+      <div id="day10-transcript" class="day9-transcript"></div>
+      <label class="field-label" for="day10-message">Сообщение в выбранной ветке</label><textarea id="day10-message" rows="3" placeholder="Например: измени бюджет ветки только на 22 000 рублей"></textarea>
+      <div class="actions"><button id="day10-send" type="button" class="button button-primary">Отправить</button></div><p id="day10-notice" class="notice" role="status">Выберите стратегию и ветку.</p>
+      <section id="day10-results" class="day9-evaluation" hidden><h3>Сравнение стратегий</h3><div class="day10-table-wrap"><table class="day10-table"><thead><tr><th>Стратегия</th><th>Детали</th><th>API input / output</th><th>Вызовы</th><th>Стоимость</th><th>Сложность</th></tr></thead><tbody id="day10-table-body"></tbody></table></div><div id="day10-result-cards" class="day9-results-grid"></div><p id="day10-conclusion" class="day9-evaluation-summary"></p></section>
     </section>
 
     <footer>Локальный учебный интерфейс · API-ключ не передаётся в браузер</footer>
