@@ -20,7 +20,7 @@ class Day9AgentTest {
             val requests = mutableListOf<JsonObject>()
             val agent = Day9Agent(conversationStore, memoryStore, request = { body ->
                 requests += body
-                if (requests.size == 1) response("Сводка: проект Маяк, открытие 18 октября, бюджет 64 500 PLN.")
+                if (requests.size == 1) response("Сводка: космический день рождения Алисы, 24 мая, бюджет 20 000 рублей.")
                 else response("План продолжения сохранён.")
             })
 
@@ -30,9 +30,9 @@ class Day9AgentTest {
             assertEquals(2, requests.size) // вызов суммаризации и обычный ответ
             assertEquals(5, result.summarizedTurns) // из 11 ходов последние 6 остались дословно
             assertEquals(1, result.summaryApiCalls)
-            assertTrue(result.summary.contains("18 октября"))
+            assertTrue(result.summary.contains("24 мая"))
             val sentInput = requests.last()["input"]!!.jsonArray
-            assertTrue(sentInput.first().jsonObject.toString().contains("Сводка: проект Маяк"))
+            assertTrue(sentInput.first().jsonObject.toString().contains("Сводка: космический день рождения Алисы"))
             assertEquals(11, sentInput.count { it.jsonObject["role"]?.jsonPrimitive?.content in setOf("user", "assistant") })
 
             // Память summary хранится отдельно и переживает создание нового хранилища.
