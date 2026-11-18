@@ -1,0 +1,15 @@
+.day11-experiment { margin-top: 2rem; }
+.day11-rules, .day11-layers { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin: 1.2rem 0; }
+.day11-rules article, .day11-layer, .day11-answer, .day11-checks, .day11-entry { border: 1px solid var(--border, #d7d1c4); border-radius: 12px; padding: 1rem; background: rgba(255,255,255,.35); }
+.day11-rules h3, .day11-layer h3, .day11-answer h3, .day11-checks h3 { margin: 0 0 .4rem; }
+.day11-rules p { margin: 0; }
+.day11-layer > div { display: flex; align-items: baseline; justify-content: space-between; gap: .6rem; }
+.day11-layer pre, .day11-answer pre { min-height: 4.5rem; max-height: 15rem; overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere; }
+.day11-token { font-size: .84rem; color: var(--muted, #6d675d); white-space: nowrap; }
+.day11-entry { margin: 1rem 0; }
+.day11-entry textarea { width: 100%; box-sizing: border-box; margin-top: .6rem; }
+.day11-answer, .day11-checks { margin-top: 1rem; }
+.day11-check-result { padding: .7rem 0; border-bottom: 1px solid var(--border, #ddd); }
+.day11-check-result:last-child { border: 0; }
+.day11-check-result p { margin: .25rem 0; }
+@media (max-width: 760px) { .day11-rules, .day11-layers { grid-template-columns: 1fr; } }

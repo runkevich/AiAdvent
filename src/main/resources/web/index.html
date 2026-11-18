@@ -21,6 +21,8 @@
   <script src="/day9/day9.js?v=day9-1" defer></script>
   <link rel="stylesheet" href="/day10/day10.css?v=day10-1">
   <script src="/day10/day10.js?v=day10-1" defer></script>
+  <link rel="stylesheet" href="/day11/day11.css?v=day11-1">
+  <script src="/day11/day11.js?v=day11-1" defer></script>
 </head>
 <body>
   <main class="page-shell">
@@ -527,6 +529,33 @@
       <label class="field-label" for="day10-message">Сообщение в выбранной ветке</label><textarea id="day10-message" rows="3" placeholder="Например: измени бюджет ветки только на 22 000 рублей"></textarea>
       <div class="actions"><button id="day10-send" type="button" class="button button-primary">Отправить</button></div><p id="day10-notice" class="notice" role="status">Выберите стратегию и ветку.</p>
       <section id="day10-results" class="day9-evaluation" hidden><h3>Сравнение стратегий</h3><div class="day10-table-wrap"><table class="day10-table"><thead><tr><th>Стратегия</th><th>Детали</th><th>API input / output</th><th>Вызовы</th><th>Стоимость</th><th>Сложность</th></tr></thead><tbody id="day10-table-body"></tbody></table></div><div id="day10-result-cards" class="day9-results-grid"></div><p id="day10-conclusion" class="day9-evaluation-summary"></p></section>
+    </section>
+
+    <section class="experiment day11-experiment" aria-labelledby="day11-title">
+      <div class="section-heading"><div><div class="eyebrow">Задание · День 11</div><h2 id="day11-title">Модель памяти ассистента</h2></div><span id="day11-status" class="status-pill">Создайте сессию</span></div>
+      <p class="day9-intro">Три слоя хранятся в отдельных полях: краткосрочный диалог, рабочие данные задачи и долговременные facts. Каждый запрос показывает вклад слоёв в контекст.</p>
+      <div class="day9-actions"><button id="day11-session" type="button" class="button button-primary">Создать сессию памяти</button><button id="day11-check" type="button" class="button button-secondary" disabled>Проверить 3 контрольных вопроса</button></div>
+      <p id="day11-notice" class="notice" role="status">При наличии сохранённых Sticky Facts из Дня 10 они будут импортированы; иначе загрузится тот же учебный набор facts.</p>
+      <div class="day11-rules">
+        <article><h3>Краткосрочная</h3><p>Последние 6 сообщений текущего диалога. Не содержит состояния задачи и постоянных facts.</p></article>
+        <article><h3>Рабочая</h3><p>Полный снимок активной задачи: задача, этап, следующий шаг. Передаётся в каждом запросе задачи.</p></article>
+        <article><h3>Долговременная</h3><p>Проверенные facts из Дня 10. Передаётся как справка, новые сведения туда не попадают автоматически.</p></article>
+      </div>
+      <section id="day11-layers" class="day11-layers" hidden>
+        <article class="day11-layer"><div><h3>Краткосрочная память</h3><span id="day11-short-tokens" class="day11-token">0 токенов</span></div><pre id="day11-short"></pre><button type="button" class="button button-secondary day11-clear" data-layer="short_term">Очистить слой</button></article>
+        <article class="day11-layer"><div><h3>Рабочая память</h3><span id="day11-working-tokens" class="day11-token">0 токенов</span></div><pre id="day11-working"></pre><button type="button" class="button button-secondary day11-clear" data-layer="working">Очистить слой</button></article>
+        <article class="day11-layer"><div><h3>Долговременная память</h3><span id="day11-long-tokens" class="day11-token">0 токенов</span></div><pre id="day11-long"></pre><button type="button" class="button button-secondary day11-clear" data-layer="long_term">Очистить слой</button></article>
+      </section>
+      <section class="day11-entry">
+        <label class="field-label" for="day11-layer-select">Явно сохранить запись в слой</label>
+        <select id="day11-layer-select"><option value="short_term">Краткосрочная — заметка только текущего диалога</option><option value="working">Рабочая — «ключ: значение» задачи</option><option value="long_term">Долговременная — «ключ: значение» проверенного факта</option></select>
+        <textarea id="day11-memory-text" rows="2" placeholder="Например: следующее действие: выбрать площадку"></textarea>
+        <div class="actions"><button id="day11-remember" type="button" class="button button-secondary">Сохранить в выбранный слой</button></div>
+      </section>
+      <label class="field-label" for="day11-message">Сообщение ассистенту</label><textarea id="day11-message" rows="3" placeholder="Например: напомни следующее действие и время начала праздника"></textarea>
+      <div class="actions"><button id="day11-send" type="button" class="button button-primary">Отправить</button></div>
+      <section id="day11-answer" class="day11-answer" hidden><h3>Ответ</h3><pre id="day11-answer-text"></pre><p id="day11-answer-stats" class="notice"></p></section>
+      <section id="day11-checks" class="day11-checks" hidden><h3>Проверка после очистки</h3><p>Очищайте слои по одному и повторяйте тест: соответствующий вопрос должен получить «не помню».</p><div id="day11-check-results"></div></section>
     </section>
 
     <footer>Локальный учебный интерфейс · API-ключ не передаётся в браузер</footer>
