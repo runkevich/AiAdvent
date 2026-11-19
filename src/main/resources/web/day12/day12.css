@@ -1,0 +1,14 @@
+.day12-experiment { margin-top: 2rem; }
+.day12-create, .day12-dialogue, .day12-compare, .day12-stability { margin: 1.1rem 0; padding: 1rem; border: 1px solid var(--border, #d7d1c4); border-radius: 12px; background: rgba(255,255,255,.35); }
+.day12-create input, .day12-create select, .day12-dialogue textarea, .day12-compare textarea { width: 100%; box-sizing: border-box; margin: .35rem 0 .8rem; }
+.day12-profiles, .day12-results { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin: 1rem 0; }
+.day12-profile, .day12-result { padding: 1rem; border: 1px solid var(--border, #d7d1c4); border-radius: 12px; background: rgba(255,255,255,.45); }
+.day12-profile.is-active { border-color: var(--accent, #4d6b50); box-shadow: 0 0 0 2px rgba(77,107,80,.16); }
+.day12-profile h3, .day12-result h4 { margin: 0 0 .45rem; }
+.day12-profile p, .day12-result p { margin: .35rem 0; }
+.day12-profile-actions { display: flex; gap: .6rem; align-items: center; margin-top: .8rem; }
+.day12-answer { margin-top: 1rem; }
+.day12-answer pre, .day12-result pre { white-space: pre-wrap; overflow-wrap: anywhere; max-height: 18rem; overflow: auto; }
+.day12-complies { color: #28633d; }.day12-fails { color: #9c3526; }
+.day12-stability-list { display: grid; gap: .4rem; }.day12-stability-row { display: flex; gap: .8rem; border-bottom: 1px solid var(--border, #ddd); padding: .45rem 0; }
+@media (max-width: 760px) { .day12-profiles, .day12-results { grid-template-columns: 1fr; } }

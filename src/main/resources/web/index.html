@@ -23,6 +23,8 @@
   <script src="/day10/day10.js?v=day10-1" defer></script>
   <link rel="stylesheet" href="/day11/day11.css?v=day11-1">
   <script src="/day11/day11.js?v=day11-1" defer></script>
+  <link rel="stylesheet" href="/day12/day12.css?v=day12-1">
+  <script src="/day12/day12.js?v=day12-1" defer></script>
 </head>
 <body>
   <main class="page-shell">
@@ -556,6 +558,34 @@
       <div class="actions"><button id="day11-send" type="button" class="button button-primary">Отправить</button></div>
       <section id="day11-answer" class="day11-answer" hidden><h3>Ответ</h3><pre id="day11-answer-text"></pre><p id="day11-answer-stats" class="notice"></p></section>
       <section id="day11-checks" class="day11-checks" hidden><h3>Проверка после очистки</h3><p>Очищайте слои по одному и повторяйте тест: соответствующий вопрос должен получить «не помню».</p><div id="day11-check-results"></div></section>
+    </section>
+
+    <section class="experiment day12-experiment" aria-labelledby="day12-title">
+      <div class="section-heading"><div><div class="eyebrow">Задание · День 12</div><h2 id="day12-title">Персонализация ассистента</h2></div><span id="day12-status" class="status-pill">Создайте профили</span></div>
+      <p class="day9-intro">Профиль — отдельная долговременная память пользователя поверх слоёв Дня 11. Он добавляется в каждый запрос и может обновиться прямо из диалога.</p>
+      <div class="day12-create">
+        <label class="field-label" for="day12-name">Имя профиля</label><input id="day12-name" placeholder="Например: Лена">
+        <label class="field-label" for="day12-preset">Предпочтения</label><select id="day12-preset"><option value="CONCISE_CODE_INFORMAL">Кратко · с кодом · на «ты»</option><option value="DETAILED_NO_CODE_FORMAL">Подробно · без кода · на «вы»</option><option value="CONCISE_NO_CODE_FORMAL">Кратко · без кода · на «вы»</option></select>
+        <div class="actions"><button id="day12-create-profile" type="button" class="button button-secondary">Создать профиль</button><button id="day12-create-set" type="button" class="button button-primary">Создать 3 контрастных профиля</button></div>
+      </div>
+      <p id="day12-notice" class="notice" role="status">Профили сохраняются локально. Для сравнения отметьте два или три профиля.</p>
+      <div id="day12-profiles" class="day12-profiles"></div>
+      <section class="day12-dialogue">
+        <h3>Диалог и обучение профиля</h3><p>Выберите активный профиль. Фраза «отвечай подробно, без кода, на вы» обновит его и отметит источники как «из диалога».</p>
+        <label class="field-label" for="day12-message">Сообщение</label><textarea id="day12-message" rows="3" placeholder="Например: отвечай подробно, без кода, на вы. Как спланировать праздник?"></textarea>
+        <div class="actions"><button id="day12-send" type="button" class="button button-primary">Отправить активному профилю</button></div>
+        <section id="day12-answer" class="day12-answer" hidden><h3>Ответ</h3><pre id="day12-answer-text"></pre><p id="day12-answer-stats" class="notice"></p></section>
+      </section>
+      <section class="day12-compare">
+        <h3>Сравнение одинакового вопроса</h3><label class="field-label" for="day12-question">Вопрос для всех отмеченных профилей</label><textarea id="day12-question" rows="2">Как спланировать день рождения ребёнка за одну неделю?</textarea>
+        <div class="actions"><button id="day12-compare-button" type="button" class="button button-secondary">Сравнить профили</button></div>
+        <section id="day12-comparison" hidden><p id="day12-comparison-summary" class="notice"></p><div id="day12-comparison-results" class="day12-results"></div></section>
+      </section>
+      <section class="day12-stability">
+        <h3>Устойчивость профиля</h3><p>Отправляет десять последовательных вариантов вопроса активному профилю и фиксирует первый ответ, не прошедший три проверки.</p>
+        <div class="actions"><button id="day12-stability-button" type="button" class="button button-secondary">Проверить 10 ответов</button></div>
+        <section id="day12-stability-results" hidden><p id="day12-stability-summary" class="notice"></p><div id="day12-stability-list" class="day12-stability-list"></div></section>
+      </section>
     </section>
 
     <footer>Локальный учебный интерфейс · API-ключ не передаётся в браузер</footer>
