@@ -1,0 +1,8 @@
+.day13-experiment { margin-top: 2rem; }
+.day13-create, .day13-state, .day13-assistant, .day13-events { margin: 1rem 0; padding: 1rem; border: 1px solid var(--border, #d7d1c4); border-radius: 12px; background: rgba(255,255,255,.35); }
+.day13-create input, .day13-create textarea, .day13-assistant textarea { width: 100%; box-sizing: border-box; margin: .35rem 0 .8rem; }
+.day13-flow { display: flex; align-items: center; gap: .5rem; margin-bottom: 1rem; flex-wrap: wrap; }
+.day13-flow span { border: 1px solid var(--border, #d7d1c4); border-radius: 999px; padding: .4rem .7rem; color: var(--muted, #6d675d); }
+.day13-flow span.is-current { color: #fff; background: var(--accent, #4d6b50); border-color: var(--accent, #4d6b50); }.day13-flow span.is-complete { border-color: var(--accent, #4d6b50); }
+.day13-state-card p { margin: .45rem 0; }.day13-paused { margin-left: .6rem; color: #9c6b16; }
+.day13-assistant pre { white-space: pre-wrap; overflow-wrap: anywhere; margin-bottom: 0; }.day13-event { padding: .55rem 0; border-bottom: 1px solid var(--border, #ddd); }.day13-event:last-child { border: 0; }.day13-event p { margin: .15rem 0; }

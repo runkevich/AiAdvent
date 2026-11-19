@@ -21,6 +21,7 @@ import day9.day9Routes
 import day10.day10Routes
 import day11.day11Routes
 import day12.day12Routes
+import day13.day13Routes
 import io.ktor.http.ContentType
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.ApplicationCall
@@ -73,6 +74,7 @@ fun main() {
             day10Routes()
             day11Routes()
             day12Routes()
+            day13Routes()
             get("/api/day4/config") {
                 val config = buildJsonObject {
                     put("model", Day4Config.model)

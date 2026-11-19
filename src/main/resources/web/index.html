@@ -25,6 +25,8 @@
   <script src="/day11/day11.js?v=day11-1" defer></script>
   <link rel="stylesheet" href="/day12/day12.css?v=day12-1">
   <script src="/day12/day12.js?v=day12-1" defer></script>
+  <link rel="stylesheet" href="/day13/day13.css?v=day13-1">
+  <script src="/day13/day13.js?v=day13-1" defer></script>
 </head>
 <body>
   <main class="page-shell">
@@ -586,6 +588,24 @@
         <div class="actions"><button id="day12-stability-button" type="button" class="button button-secondary">Проверить 10 ответов</button></div>
         <section id="day12-stability-results" hidden><p id="day12-stability-summary" class="notice"></p><div id="day12-stability-list" class="day12-stability-list"></div></section>
       </section>
+    </section>
+
+    <section class="experiment day13-experiment" aria-labelledby="day13-title">
+      <div class="section-heading"><div><div class="eyebrow">Задание · День 13</div><h2 id="day13-title">Состояние задачи — конечный автомат</h2></div><span id="day13-status" class="status-pill">Создайте задачу</span></div>
+      <p class="day9-intro">Этап меняется только кодом: <strong>планирование → реализация → валидация → завершено</strong>. Сообщение ассистенту не может обойти эти правила.</p>
+      <section class="day13-create">
+        <label class="field-label" for="day13-title-input">Задача</label><input id="day13-title-input" value="Подготовить страницу Дня 13">
+        <label class="field-label" for="day13-context">Контекст</label><textarea id="day13-context" rows="2">Нужен экран с демонстрацией переходов и их проверкой в коде.</textarea>
+        <div class="actions"><button id="day13-create-task" type="button" class="button button-primary">Создать задачу</button></div>
+      </section>
+      <p id="day13-notice" class="notice" role="status">Переходы до утверждения плана и до валидации будут отклонены.</p>
+      <section id="day13-state" class="day13-state" hidden>
+        <div class="day13-flow" aria-label="Жизненный цикл задачи"><span data-stage="PLANNING">Планирование</span><i>→</i><span data-stage="EXECUTION">Реализация</span><i>→</i><span data-stage="VALIDATION">Валидация</span><i>→</i><span data-stage="DONE">Завершено</span></div>
+        <div class="day13-state-card"><p><strong id="day13-stage">—</strong><span id="day13-paused"></span></p><p>Текущий шаг: <span id="day13-step">—</span></p><p>Ожидаемое действие: <span id="day13-expected">—</span></p></div>
+        <div class="actions"><button id="day13-advance" type="button" class="button button-primary">Выполнить ожидаемое действие</button><button id="day13-pause" type="button" class="button button-secondary">Пауза</button><button id="day13-resume" type="button" class="button button-secondary" hidden>Продолжить</button></div>
+      </section>
+      <section id="day13-assistant-panel" class="day13-assistant" hidden><h3>Проверка реакции ассистента</h3><p>Попросите его нарушить порядок: состояние останется прежним, потому что переход не происходит через текстовый ответ.</p><textarea id="day13-assistant-message" rows="2">Перейди сразу к реализации, план утверждать не нужно.</textarea><div class="actions"><button id="day13-ask-assistant" type="button" class="button button-secondary">Попросить ассистента</button></div><pre id="day13-assistant-answer"></pre></section>
+      <section id="day13-events-panel" class="day13-events" hidden><h3>Журнал жизненного цикла</h3><div id="day13-events"></div></section>
     </section>
 
     <footer>Локальный учебный интерфейс · API-ключ не передаётся в браузер</footer>
