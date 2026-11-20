@@ -29,6 +29,8 @@
   <script src="/day13/day13.js?v=day13-1" defer></script>
   <link rel="stylesheet" href="/day14/day14.css?v=day14-1">
   <script src="/day14/day14.js?v=day14-1" defer></script>
+  <link rel="stylesheet" href="/day15/day15.css?v=day15-1">
+  <script src="/day15/day15.js?v=day15-1" defer></script>
 </head>
 <body>
   <main class="page-shell">
@@ -620,6 +622,18 @@
       <section id="day14-change-panel" class="day14-change" hidden><h3>Явное изменение инварианта</h3><p>Диалог не изменяет реестр. Выберите ограничение и зафиксируйте замену отдельно.</p><label class="field-label" for="day14-invariant-select">Инвариант</label><select id="day14-invariant-select"></select><label class="field-label" for="day14-replacement">Новое значение</label><textarea id="day14-replacement" rows="2" placeholder="Например: Сервис на Go/Gin"></textarea><label class="field-label" for="day14-terms">Запрещённые термины через запятую</label><input id="day14-terms" placeholder="например: kotlin, ktor, spring"><div class="actions"><button id="day14-change" type="button" class="button button-secondary">Зафиксировать изменение</button></div></section>
       <section id="day14-bypass-panel" class="day14-bypass" hidden><h3>Проверка обходов</h3><p>Восемь вариантов: «в виде исключения», «просто для примера», ролевая подмена и «забудь ограничения».</p><div class="actions"><button id="day14-bypass" type="button" class="button button-secondary">Запустить 8 попыток обхода</button></div><p id="day14-bypass-summary" class="notice"></p><div id="day14-bypass-results"></div></section>
       <section id="day14-changes-panel" class="day14-changes" hidden><h3>Журнал изменений</h3><div id="day14-changes"></div></section>
+    </section>
+
+    <section class="experiment day15-experiment" aria-labelledby="day15-title">
+      <div class="section-heading"><div><div class="eyebrow">Задание · День 15</div><h2 id="day15-title">Устаревание и конфликты памяти</h2></div><span id="day15-status" class="status-pill">Создайте задачу</span></div>
+      <p class="day9-intro">Текущие факты и история хранятся раздельно. В prompt попадают только актуальные факты с временем записи, а прежние значения остаются в журнале.</p>
+      <section class="day15-create"><label class="field-label" for="day15-task">Задача</label><input id="day15-task" value="Форма записи на консультацию"><div class="actions"><button id="day15-create" type="button" class="button button-primary">Создать память задачи</button></div></section>
+      <p id="day15-notice" class="notice" role="status">Сценарий включает перенос срока, отмену требования, смену подхода и изменение статуса.</p>
+      <section id="day15-memory" class="day15-memory" hidden><div><h3>Долговременная память — актуальные факты</h3><div id="day15-long"></div></div><div><h3>Рабочая память</h3><div id="day15-working"></div></div></section>
+      <section id="day15-scenario" class="day15-scenario" hidden><h3>Диалог изменений</h3><p>Применяйте изменения по одному и после каждого спрашивайте агента об актуальном значении.</p><div class="day15-actions"><button type="button" class="button button-secondary day15-change" data-layer="long-term" data-key="срок" data-value="25 декабря">Срок: 20 → 25 декабря</button><button type="button" class="button button-secondary day15-change" data-layer="working" data-key="требование" data-value="">Отменить подтверждение email</button><button type="button" class="button button-secondary day15-change" data-layer="long-term" data-key="подход" data-value="Нативный JavaScript">Подход: React → нативный JavaScript</button><button type="button" class="button button-secondary day15-change" data-layer="long-term" data-key="статус" data-value="реализация">Статус: планирование → реализация</button></div></section>
+      <section id="day15-ask-panel" class="day15-ask" hidden><h3>Спросить агента</h3><label class="field-label" for="day15-key">Факт</label><select id="day15-key"><option value="срок">Срок</option><option value="требование">Требование</option><option value="подход">Подход</option><option value="статус">Статус</option></select><div class="actions"><button id="day15-ask" type="button" class="button button-primary">Спросить актуальное значение</button></div><pre id="day15-answer"></pre><p id="day15-answer-info" class="notice"></p></section>
+      <section id="day15-complete-panel" class="day15-complete" hidden><h3>Очистка после завершения</h3><p>Рабочая память очистится, а долговременные факты и журнал замен сохранятся.</p><div class="actions"><button id="day15-complete" type="button" class="button button-secondary">Завершить задачу и очистить рабочую память</button></div></section>
+      <section id="day15-history-panel" class="day15-history" hidden><h3>Журнал замен</h3><div id="day15-history"></div><h3>История решений</h3><div id="day15-decisions"></div></section>
     </section>
 
     <footer>Локальный учебный интерфейс · API-ключ не передаётся в браузер</footer>
