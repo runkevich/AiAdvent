@@ -1,0 +1,6 @@
+.day14-experiment { margin-top: 2rem; }
+.day14-create, .day14-registry, .day14-chat, .day14-change, .day14-bypass, .day14-changes { margin: 1rem 0; padding: 1rem; border: 1px solid var(--border, #d7d1c4); border-radius: 12px; background: rgba(255,255,255,.35); }
+.day14-create input, .day14-chat textarea, .day14-change textarea, .day14-change input, .day14-change select { width: 100%; box-sizing: border-box; margin: .35rem 0 .8rem; }
+.day14-invariants { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }.day14-invariant { padding: .8rem; border: 1px solid var(--border, #ddd); border-radius: 10px; }.day14-invariant h4 { margin: 0 0 .35rem; }.day14-invariant p { margin: .35rem 0; }.day14-terms { color: var(--muted, #6d675d); font-size: .88rem; }
+.day14-chat pre { min-height: 3rem; white-space: pre-wrap; overflow-wrap: anywhere; }.day14-bypass-row, .day14-change-row { padding: .55rem 0; border-bottom: 1px solid var(--border, #ddd); }.day14-blocked { color: #28633d; }.day14-passed { color: #9c3526; }
+@media (max-width: 760px) { .day14-invariants { grid-template-columns: 1fr; } }
